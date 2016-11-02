@@ -2,9 +2,32 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppQuest_Schrittzaehler.Pages.HomePage">
-    <StackLayout Orientation="Vertical">        
-        <Label Text="{Binding Direction}" VerticalOptions="Center" HorizontalOptions="Center" />
-        <Label Text="{Binding Steps}" VerticalOptions="Center" HorizontalOptions="Center" />
+             x:Class="AppQuest_Schrittzaehler.Pages.HomePage"
+             Title="AppQuest_Schrittzaehler"
+             Icon="">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="AddRunButton" Icon="add.png" Clicked="AddRunButton_OnClicked" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Orientation="Vertical" Padding="20" Spacing="20">
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+          <ListView x:Name="RouteListView" ItemsSource="{Binding RouteList}" HasUnevenRows="True" ItemSelected="RouteListView_OnItemSelected">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <SwitchCell Text="{Binding Title}" />
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+            <StackLayout IsVisible="{Binding NoEntries}"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="CenterAndExpand"
+                         AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         Padding="16,0">
+                <Label Text="No entries found" HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                       VerticalOptions="CenterAndExpand" FontSize="22" TextColor="#D3D2D2" />
+            </StackLayout>
+        </AbsoluteLayout>
     </StackLayout>
+
 </ContentPage>

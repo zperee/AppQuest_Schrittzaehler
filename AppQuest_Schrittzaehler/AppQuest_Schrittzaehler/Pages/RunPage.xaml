@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppQuest_Schrittzaehler.Pages.RunPage"
+             Title="Detail">
+  <ContentPage.ToolbarItems>
+    <ToolbarItem x:Name="AddStepButton" Icon="shoe.png" Clicked="AddStepButton_OnClicked" />
+  </ContentPage.ToolbarItems>
+  <StackLayout Orientation="Horizontal">
+    <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Button x:Name="ButtonEndStation" Text="Send to LogBuch" Clicked="ScanButton_OnClicked" BackgroundColor="#43BB7B" TextColor="White" IsEnabled="{Binding NoEntries, Converter={StaticResource booleanConverter}}"/>
+  </StackLayout>
+</ContentPage>
