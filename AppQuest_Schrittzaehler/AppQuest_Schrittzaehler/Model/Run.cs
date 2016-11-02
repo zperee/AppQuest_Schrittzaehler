@@ -1,5 +1,6 @@
-﻿using System;
-namespace AppQuest_Schrittzaehler
+﻿using System.Collections.Generic;
+
+namespace AppQuest_Schrittzaehler.Model
 {
 	public class Run
 	{

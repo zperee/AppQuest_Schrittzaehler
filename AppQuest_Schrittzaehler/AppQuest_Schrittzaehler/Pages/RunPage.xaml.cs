@@ -1,23 +1,27 @@
 ﻿using System;
+using AppQuest_Schrittzaehler.Model;
+using AppQuest_Schrittzaehler.ViewModel;
 using Xamarin.Forms;
 
 namespace AppQuest_Schrittzaehler.Pages
 {
     public partial class RunPage : ContentPage
     {
-        public RunPage()
+        private readonly RunPageViewModel _runPageViewModel;
+        public RunPage(Route route)
         {
             InitializeComponent();
+            _runPageViewModel = new RunPageViewModel(route);
         }
 
         private void ScanButton_OnClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Navigation.PushModalAsync(_runPageViewModel.ScanButton_OnClicked());
         }
 
         private void AddStepButton_OnClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            _runPageViewModel.AddStepButton_OnClicked();
         }
     }
 }

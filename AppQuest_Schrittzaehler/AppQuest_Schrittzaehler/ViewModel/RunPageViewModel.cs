@@ -1,9 +1,8 @@
-﻿using System;
-using AppQuest_Schrittzaehler.Infrastructure;
+﻿using AppQuest_Schrittzaehler.Infrastructure;
 using AppQuest_Schrittzaehler.Model;
 using Xamarin.Forms;
 
-namespace AppQuest_Schrittzaehler
+namespace AppQuest_Schrittzaehler.ViewModel
 {
 	public class RunPageViewModel
 	{

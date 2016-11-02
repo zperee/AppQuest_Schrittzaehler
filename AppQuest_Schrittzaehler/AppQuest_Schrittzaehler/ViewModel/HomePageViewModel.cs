@@ -1,32 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppQuest_Schrittzaehler.Infrastructure;
+using AppQuest_Schrittzaehler.Model;
+using AppQuest_Schrittzaehler.Pages;
 using Xamarin.Forms;
 
 namespace AppQuest_Schrittzaehler.ViewModel
 {
-	public class HomePageViewModel
-	{
-		MyScanner _scanner;
-		Run _run; 
+    public class HomePageViewModel
+    {
+        private Run _run;
+        private readonly MyScanner _scanner;
 
-		public HomePageViewModel() {
-			_scanner = new MyScanner();
+        public HomePageViewModel()
+        {
+            _scanner = new MyScanner();
 
-			//TODO Fill from File
-			_run = new Run();
-		}
+            //TODO Fill from File
+            _run = new Run();
+        }
 
-		public ContentPage AddRunButton_OnClicked()
-		{
-			 return _scanner.ScanQrCode();
-		}
+        public ContentPage AddRunButton_OnClicked()
+        {
+            return _scanner.ScanQrCode();
+        }
 
-		public ContentPage RoutListView_OnItemSelected(object sender){
-			return new RunPage();
-		}
-	}
+        public ContentPage RoutListView_OnItemSelected(object sender)
+        {
+            var item = (Route) sender;
+            return new RunPage(item);
+        }
+    }
 }
-

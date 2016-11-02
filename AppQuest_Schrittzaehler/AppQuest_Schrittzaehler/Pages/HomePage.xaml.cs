@@ -6,7 +6,7 @@ namespace AppQuest_Schrittzaehler.Pages
 {
     public partial class HomePage : ContentPage
     {
-        private HomePageViewModel _homePageViewModel;
+        private readonly HomePageViewModel _homePageViewModel;
 
         public HomePage()
         {
@@ -16,12 +16,12 @@ namespace AppQuest_Schrittzaehler.Pages
 
         private void AddRunButton_OnClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Navigation.PushModalAsync(_homePageViewModel.AddRunButton_OnClicked());
         }
 
         private void RouteListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            _homePageViewModel.RoutListView_OnItemSelected(sender);
         }
     }
 }
