@@ -1,1 +1,0 @@
-# AppQuest_Schrittzaehler
