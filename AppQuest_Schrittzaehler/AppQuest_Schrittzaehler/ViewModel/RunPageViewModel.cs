@@ -18,7 +18,8 @@ namespace AppQuest_Schrittzaehler.ViewModel
 
 		public ContentPage ScanButton_OnClicked()
 		{
-			 return _scanner.ScanQrCode();
+			 //return _scanner.ScanQrCode();
+		    return null;
 		}
 
 		public void AddStepButton_OnClicked(){

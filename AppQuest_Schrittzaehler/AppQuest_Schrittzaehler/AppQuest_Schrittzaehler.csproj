@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Infrastructure\FileSaver.cs" />
+    <Compile Include="Model\ReceiveObject.cs" />
     <Compile Include="Model\Route.cs" />
     <Compile Include="Model\Steps.cs" />
     <Compile Include="Model\SubmitObject.cs" />

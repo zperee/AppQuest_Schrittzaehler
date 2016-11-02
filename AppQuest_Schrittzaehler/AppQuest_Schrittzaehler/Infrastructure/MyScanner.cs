@@ -1,11 +1,15 @@
-﻿using Xamarin.Forms;
+﻿using System.Collections;
+using System.Collections.Generic;
+using AppQuest_Schrittzaehler.Model;
+using Newtonsoft.Json;
+using Xamarin.Forms;
 using ZXing.Net.Mobile.Forms;
 
 namespace AppQuest_Schrittzaehler.Infrastructure
 {
 	public class MyScanner
 	{
-		public ContentPage ScanQrCode()
+		public ContentPage ScanQrCode(Run run)
 		{
 			var scanPage = new ZXingScannerPage();
 
@@ -16,9 +20,19 @@ namespace AppQuest_Schrittzaehler.Infrastructure
 
 			    if (!string.IsNullOrEmpty(result.Text))
 			    {
-			        //memoryItem.Title = result.Text;
-			        //await SaveFile();
-			    }
+			        //var json = JsonConvert.DeserializeObject<IEnumerable<ReceiveObject>>(result.Text);
+
+			        var test = result.Text;
+
+			        var route = new Route
+			        {
+                       Title = "Run #" + (run.RouteList.Count + 1),                       
+                    };
+
+                    
+
+
+                }
 			    else
 			    {
 			        //await DisplayAlert("Warnung", "QR-Code konnte nicht gescannt werden.", "OK");

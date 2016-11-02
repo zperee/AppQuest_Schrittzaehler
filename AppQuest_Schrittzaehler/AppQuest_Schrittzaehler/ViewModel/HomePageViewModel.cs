@@ -20,7 +20,7 @@ namespace AppQuest_Schrittzaehler.ViewModel
 
         public ContentPage AddRunButton_OnClicked()
         {
-            return _scanner.ScanQrCode();
+            return _scanner.ScanQrCode(_run);
         }
 
         public ContentPage RoutListView_OnItemSelected(object sender)
