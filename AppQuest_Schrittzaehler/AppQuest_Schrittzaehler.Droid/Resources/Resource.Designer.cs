@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppQuest_Schrittzaehler.Droid
+namespace AppQuest_Schrittzaehler.Droid.Resources
 {
 
 

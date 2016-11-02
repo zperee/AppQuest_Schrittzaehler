@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AppQuest_Schrittzaehler.ViewModel
+﻿namespace AppQuest_Schrittzaehler.ViewModel
 {
-    class HomePageViewModel
+    public class HomePageViewModel
     {
     }
 }
