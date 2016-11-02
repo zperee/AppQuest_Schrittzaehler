@@ -12,7 +12,7 @@ namespace AppQuest_Schrittzaehler.Infrastructure
         private readonly string _file;
         private readonly string _folder;
 
-        public FileSaver(string filename, string foldername)
+		public FileSaver(string filename = "data.json", string foldername = "LocalData")
         {
             _file = filename;
             _folder = foldername;
