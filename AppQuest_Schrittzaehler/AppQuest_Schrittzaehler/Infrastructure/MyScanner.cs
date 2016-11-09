@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using AppQuest_Schrittzaehler.Model;
 using Newtonsoft.Json;
 using Xamarin.Forms;
@@ -20,7 +21,8 @@ namespace AppQuest_Schrittzaehler.Infrastructure
 
 			    if (!string.IsNullOrEmpty(result.Text))
 			    {
-			        //var json = JsonConvert.DeserializeObject<IEnumerable<ReceiveObject>>(result.Text);
+			        var json = JsonConvert.DeserializeObject<IEnumerable<ReceiveObject>>(result.Text);
+			        var list = json.ToList();                   
 
 			        var test = result.Text;
 
