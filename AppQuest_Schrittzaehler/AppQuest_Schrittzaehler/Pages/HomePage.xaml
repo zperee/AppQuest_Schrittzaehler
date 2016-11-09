@@ -9,12 +9,12 @@
         <ToolbarItem x:Name="AddRunButton" Icon="add.png" Clicked="AddRunButton_OnClicked" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout Orientation="Vertical" Padding="20" Spacing="20">
+    <StackLayout Orientation="Vertical">
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
           <ListView x:Name="RouteListView" ItemsSource="{Binding RouteList}" HasUnevenRows="True" ItemSelected="RouteListView_OnItemSelected">
             <ListView.ItemTemplate>
               <DataTemplate>
-                <SwitchCell Text="{Binding Title}" />
+                <SwitchCell Text="{Binding Title}" IsEnabled="{Binding IsInLogbuch}"/>
               </DataTemplate>
             </ListView.ItemTemplate>
           </ListView>
