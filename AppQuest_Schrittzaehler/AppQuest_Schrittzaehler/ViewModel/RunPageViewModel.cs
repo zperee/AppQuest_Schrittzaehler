@@ -13,7 +13,7 @@ namespace AppQuest_Schrittzaehler.ViewModel
 		public RunPageViewModel(Route route) {
 			_scanner = new MyScanner();
 			_route = route; 
-			_fileSaver = new FileSaver(null, null);
+			_fileSaver = new FileSaver();
 		}
 
 		public ContentPage ScanButton_OnClicked()

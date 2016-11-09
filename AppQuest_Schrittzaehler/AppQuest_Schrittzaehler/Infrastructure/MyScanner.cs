@@ -1,51 +1,68 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Threading.Tasks;
 using AppQuest_Schrittzaehler.Model;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
 using ZXing.Net.Mobile.Forms;
 
 namespace AppQuest_Schrittzaehler.Infrastructure
 {
-	public class MyScanner
-	{
-		public ContentPage ScanQrCode(Run run)
-		{
-			var scanPage = new ZXingScannerPage();
+    public class MyScanner
+    {
+        public ContentPage ScanQrCode(Run run, FileSaver fileSaver, INavigation nav)
+        {
+            var scanPage = new ZXingScannerPage();           
 
-			scanPage.OnScanResult += (result) =>
-			{
-				// Stop scanning
-				scanPage.IsScanning = false;
+            var route = new Route
+            {
+                Title = "Run #" + (run.RouteList.Count + 1)
+            };
 
-			    if (!string.IsNullOrEmpty(result.Text))
-			    {
-			        var json = JsonConvert.DeserializeObject<IEnumerable<ReceiveObject>>(result.Text);
-			        var list = json.ToList();                   
+            scanPage.OnScanResult += async result =>
+            {
+                // Stop scanning
+                scanPage.IsScanning = false;
 
-			        var test = result.Text;
+                if (!string.IsNullOrEmpty(result.Text))
+                {
+                    var jObject = JObject.Parse(result.Text);
+                    var input = jObject["input"];
+                    var startStation = jObject["startStation"];
+                    var arr = input as JArray;
 
-			        var route = new Route
-			        {
-                       Title = "Run #" + (run.RouteList.Count + 1),                       
+                    route.Startstation = int.Parse(startStation.ToString());
+
+                    if (arr == null)
+                        return;
+
+                    var firstStep = new Steps
+                    {
+                        Direction = "Geradeaus",
+                        Step = int.Parse(arr[0].ToString())
                     };
+                    route.StepList.Add(firstStep);
 
-                    
+                    for (var index = 1; index < arr.Count; index += 2)
+                    {
+                        var direction = arr[index];
+                        var steps = arr[index + 1];
 
-
+                        var step = new Steps
+                        {
+                            Direction = direction.ToString(),
+                            Step = int.Parse(steps.ToString())
+                        };
+                        route.StepList.Add(step);
+                    }
+                    run.RouteList.Add(route);
+                    if (run.RouteList.Count > 0)
+                    {                        
+                        await fileSaver.SaveContentToLocalFileAsync(run.RouteList);                        
+                    }
+                    Device.BeginInvokeOnMainThread(() => { nav.PopModalAsync(); });
                 }
-			    else
-			    {
-			        //await DisplayAlert("Warnung", "QR-Code konnte nicht gescannt werden.", "OK");
-
-			        // Pop the page and show the result
-			        //Device.BeginInvokeOnMainThread(() => { Navigation.PopModalAsync(); });
-			    }
-			};
-
-			// Navigate to our scanner page
-			return scanPage;
-		}
-	}
+            };                     
+            // Navigate to our scanner page
+            return scanPage;
+        }
+    }
 }
