@@ -18,7 +18,7 @@ namespace AppQuest_Memory.Droid.PlattformServices
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-			SetContentView(R.layout.activity_walk);
+			//SetContentView(R.layout.activity_walk);
 			sensorManager = (SensorManager)GetSystemService(SensorService);
 			rotationSensor = sensorManager.GetDefaultSensor(SensorType.RotationVector);
 		}
@@ -41,9 +41,9 @@ namespace AppQuest_Memory.Droid.PlattformServices
 
 		public void OnSensorChanged(SensorEvent e)
 		{
-			if (e.Sensor.GetType() == SensorType.RotationVector)
+			//if (e.Sensor.GetType() == SensorType.RotationVector)
 				/*if (e.Sensor.GetType() == Sensor.StringTypeRotationVector);*/
-			{
+			/*{
 				SensorManager.GetRotationMatrixFromVector(rotationMatrix, (float[])e.Values);
 				SensorManager.GetOrientation(rotationMatrix, orientationVals);
 
@@ -71,7 +71,7 @@ namespace AppQuest_Memory.Droid.PlattformServices
 						Toast.MakeText(this, "Du hast dich gedreht!", ToastLength.Long).Show();
 					}
 				}
-			}
+			}*/
 		}
 
 		public void OnAccuracyChanged(Sensor sensor, SensorStatus accuracy)

@@ -17,7 +17,7 @@ namespace AppQuest_Memory.Droid.PlattformServices
 		public RingBuffer(int capacity)
 		{
 			this.capacity = capacity;
-			buffer = new float[capacity];
+			//buffer = new float[capacity];
 		}
 
 		public void Put(float f)

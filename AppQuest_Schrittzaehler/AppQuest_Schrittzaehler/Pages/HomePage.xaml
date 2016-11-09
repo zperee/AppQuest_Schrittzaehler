@@ -14,7 +14,7 @@
           <ListView x:Name="RouteListView" ItemsSource="{Binding RouteList}" HasUnevenRows="True" ItemSelected="RouteListView_OnItemSelected">
             <ListView.ItemTemplate>
               <DataTemplate>
-                <SwitchCell Text="{Binding Title}" IsEnabled="{Binding IsInLogbuch}"/>
+                <TextCell Text="{Binding Title}" IsEnabled="{Binding IsInLogbuch}"/>
               </DataTemplate>
             </ListView.ItemTemplate>
           </ListView>
