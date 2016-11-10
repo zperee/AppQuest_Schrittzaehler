@@ -1,4 +1,4 @@
-namespace AppQuest_Memory.Droid.PlattformServices
+namespace AppQuest_Schrittzaehler.Droid.PlattformServices
 {
 
 	public interface StepListener

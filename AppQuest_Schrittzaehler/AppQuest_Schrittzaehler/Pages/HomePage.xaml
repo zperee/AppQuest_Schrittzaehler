@@ -11,13 +11,14 @@
 
     <StackLayout Orientation="Vertical">
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-          <ListView x:Name="RouteListView" ItemsSource="{Binding RouteList}" HasUnevenRows="True" ItemSelected="RouteListView_OnItemSelected">
-            <ListView.ItemTemplate>
-              <DataTemplate>
-                <TextCell Text="{Binding Title}" IsEnabled="{Binding IsInLogbuch}"/>
-              </DataTemplate>
-            </ListView.ItemTemplate>
-          </ListView>
+            <ListView x:Name="RouteListView" ItemsSource="{Binding RouteList}" HasUnevenRows="True"
+                      ItemSelected="RouteListView_OnItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <SwitchCell Text="{Binding Title}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <StackLayout IsVisible="{Binding NoEntries}"
                          HorizontalOptions="FillAndExpand"
                          VerticalOptions="CenterAndExpand"

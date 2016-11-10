@@ -1,7 +1,19 @@
 ﻿using System;
-namespace AppQuest_Schrittzaehler
+
+namespace AppQuest_Schrittzaehler.Services
 {
-	public interface IStepCounterService
+    public class StepEventArgs : EventArgs
+    {
+        public int Step { get; set; }
+    }
+
+    public delegate void StatusUpdateHandler(object sender, StepEventArgs e);
+
+    public interface IStepCounterService
 	{
-	}
+	    void Listen();
+	    void Pause();
+
+        event StatusUpdateHandler OnStep;
+    }
 }

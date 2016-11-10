@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using AppQuest_Schrittzaehler.Droid.PlattformServices;
 
 namespace AppQuest_Schrittzaehler.Droid
 {
@@ -19,9 +20,12 @@ namespace AppQuest_Schrittzaehler.Droid
 
             base.OnCreate(bundle);
 
-            ZXing.Net.Mobile.Forms.Android.Platform.Init();
+            ZXing.Net.Mobile.Forms.Android.Platform.Init();            
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            StepCounterService.Init();
+
             LoadApplication(new App());
         }
 
