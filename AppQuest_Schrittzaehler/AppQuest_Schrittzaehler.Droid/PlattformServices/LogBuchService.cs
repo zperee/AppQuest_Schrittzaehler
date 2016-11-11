@@ -10,7 +10,7 @@ namespace AppQuest_Schrittzaehler.Droid
 {
 	public class LogBuchService : ILogBuchService
 	{
-		public void OpenLogBuch(string task, string solution, string solutionName = "solution")
+		public void OpenLogBuch(string task, string startStation, string endStation)
 		{
 			var context = Forms.Context;
 
@@ -23,7 +23,7 @@ namespace AppQuest_Schrittzaehler.Droid
 			}
 
 			// Achtung, je nach App wird etwas anderes eingetragen
-			intent.PutExtra("ch.appquest.logmessage", $"{{  \"task\": \"{task}\", \"{solutionName}\": {solution}}}");
+			intent.PutExtra("ch.appquest.logmessage", $"{{  \"task\": \"{task}\", \"startStation\": {startStation}, \"endStation\": {endStation}}}");
 
 			context.StartActivity(intent);
 		}
