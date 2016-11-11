@@ -6,7 +6,7 @@ XAMARIN Forms 2.0
 ##Aufgabe
 Ein QR Code wird auf dem Campus eingelesen, dieser enthält die Wegbeschreibung zum nächsten QR Code. Der QR Code enthält folgende Informationen. 
 ```json
-{“input”:[“10,”links”,”15″,”rechts”,”20″,”links”,”25″], “startStation” :1}
+{"input":["10", "links", "15", "rechts", "20", "links", "25"], "startStation" :1}
 ```
 Nachdem die Informationen eingelesen wurden, muss man mit hilfe des Smartphones den Weg ablaufen, bis man den nächsten QR Code erreicht. Dort wird dann die endStation eingescant und die Lösung bestehend aus startStation und endStation an den Server übermittelt. 
 ```json
