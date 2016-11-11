@@ -7,8 +7,8 @@
     <ToolbarItem x:Name="AddStepButton" Icon="shoe.png" Clicked="AddStepButton_OnClicked" />
   </ContentPage.ToolbarItems>
   <StackLayout Orientation="Horizontal">
-    <Label Text="{Binding _route.StepList[0].Direction}" VerticalOptions="Center" HorizontalOptions="Center" />
-    <Label Text="{Binding _route.StepList[0].Direction}" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Label VerticalOptions="Center" HorizontalOptions="Center" x:Name="DirectionLabel"/>
+    <Label VerticalOptions="Center" HorizontalOptions="Center" x:Name="StepLabel" />
     <Button x:Name="ButtonEndStation" Text="Send to LogBuch" Clicked="ScanButton_OnClicked" BackgroundColor="#43BB7B" TextColor="White" IsEnabled="{Binding NoEntries, Converter={StaticResource booleanConverter}}"/>
   </StackLayout>
 </ContentPage>

@@ -18,7 +18,6 @@ namespace AppQuest_Schrittzaehler.ViewModel
 			_scanner = new MyScanner();
 			_route = route; 
 			_fileSaver = new FileSaver();
-
 		    _stepCounterService = DependencyService.Get<IStepCounterService>();
 		}
 
