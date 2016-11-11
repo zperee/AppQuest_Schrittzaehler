@@ -30,5 +30,7 @@ Software Developer
 
 # Documentation
 ## Planning
+### UML
+https://www.gliffy.com/go/share/s5foum20act24fdt9167
 ### MockUps
 ![MockUps](https://raw.githubusercontent.com/zperee/AppQuest_Schrittzaehler/master/Documentation/Planning/MockUp/MockUp_AppQuest_Schrittzaehler.jpg)
