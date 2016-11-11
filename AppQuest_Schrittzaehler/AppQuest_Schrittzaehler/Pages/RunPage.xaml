@@ -5,7 +5,7 @@
              x:Class="AppQuest_Schrittzaehler.Pages.RunPage"
              Title="Detail">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="AddStepButton" Icon="shoe.png" Clicked="AddStepButton_OnClicked" />
+        <ToolbarItem x:Name="AddStepButton" Icon="step.png" Clicked="AddStepButton_OnClicked" />
     </ContentPage.ToolbarItems>
     <StackLayout Orientation="Vertical">
         <ListView VerticalOptions="StartAndExpand" SelectedItem="{Binding CurrentStep, Mode=TwoWay}"

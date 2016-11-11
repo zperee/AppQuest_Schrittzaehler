@@ -54,7 +54,11 @@ namespace AppQuest_Schrittzaehler.ViewModel
 
         public void AddStepButton_OnClicked()
         {
-            //TODO
+            CurrentStep.StepsToComplete--;
+            if (CurrentStep.StepsToComplete == 0 && ++_stepIndex < _route.StepList.Count)
+            {
+                CurrentStep = _route.StepList[_stepIndex];
+            }
         }
 
 
