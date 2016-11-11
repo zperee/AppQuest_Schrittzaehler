@@ -14,3 +14,8 @@ Software Developer
 [Elia Perenzin](https://github.com/zperee)  
 [Homepage](http://eliaperenzin.ch/)  
 Software Developer
+
+# Documentation
+## Planning
+### MockUps
+![MockUps](https://raw.githubusercontent.com/zperee/AppQuest_Schrittzaehler/master/Documentation/Planning/MockUp/MockUp_AppQuest_Schrittzaehler.jpg)
