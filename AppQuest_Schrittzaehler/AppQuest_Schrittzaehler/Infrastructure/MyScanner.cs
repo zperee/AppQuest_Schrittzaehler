@@ -34,10 +34,10 @@ namespace AppQuest_Schrittzaehler.Infrastructure
                     if (arr == null)
                         return;
 
-                    var firstStep = new Steps
+                    var firstStep = new Step
                     {
                         Direction = "Geradeaus",
-                        Step = int.Parse(arr[0].ToString())
+                        NumberOfSteps = int.Parse(arr[0].ToString())
                     };
                     route.StepList.Add(firstStep);
 
@@ -46,10 +46,10 @@ namespace AppQuest_Schrittzaehler.Infrastructure
                         var direction = arr[index];
                         var steps = arr[index + 1];
 
-                        var step = new Steps
+                        var step = new Step
                         {
                             Direction = direction.ToString(),
-                            Step = int.Parse(steps.ToString())
+                            NumberOfSteps = int.Parse(steps.ToString())
                         };
                         route.StepList.Add(step);
                     }

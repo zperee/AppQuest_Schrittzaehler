@@ -21,7 +21,6 @@ namespace AppQuest_Schrittzaehler.ViewModel
             _scanner = new MyScanner();
             _fileSaver = new FileSaver();
 
-            //TODO Fill from File
             _run = new Run();
         }        
 

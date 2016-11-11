@@ -48,10 +48,14 @@ namespace AppQuest_Schrittzaehler.Pages
 
         private void RouteListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = sender;
-            ((ListView) sender).SelectedItem = null;
-            var res = _homePageViewModel.RouteListView_OnItemSelected(((ListView)item).SelectedItem);
-            Navigation.PushAsync(res);
+            var item = ((ListView)sender).SelectedItem;
+
+            if (item == null) return;
+
+            ((ListView)sender).SelectedItem = null;
+
+            Navigation.PushAsync(_homePageViewModel.RouteListView_OnItemSelected(item));
+            
         }
 
         public ObservableCollection<Route> RouteList

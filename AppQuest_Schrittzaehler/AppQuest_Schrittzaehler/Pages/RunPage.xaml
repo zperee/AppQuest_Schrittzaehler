@@ -1,14 +1,29 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppQuest_Schrittzaehler.Pages.RunPage"
              Title="Detail">
-  <ContentPage.ToolbarItems>
-    <ToolbarItem x:Name="AddStepButton" Icon="shoe.png" Clicked="AddStepButton_OnClicked" />
-  </ContentPage.ToolbarItems>
-  <StackLayout Orientation="Horizontal">
-    <Label VerticalOptions="Center" HorizontalOptions="Center" x:Name="DirectionLabel"/>
-    <Label VerticalOptions="Center" HorizontalOptions="Center" x:Name="StepLabel" />
-    <Button x:Name="ButtonEndStation" Text="Send to LogBuch" Clicked="ScanButton_OnClicked" BackgroundColor="#43BB7B" TextColor="White" IsEnabled="{Binding NoEntries, Converter={StaticResource booleanConverter}}"/>
-  </StackLayout>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="AddStepButton" Icon="shoe.png" Clicked="AddStepButton_OnClicked" />
+    </ContentPage.ToolbarItems>
+    <StackLayout Orientation="Vertical">
+        <ListView VerticalOptions="StartAndExpand" SelectedItem="{Binding CurrentStep, Mode=TwoWay}"
+                  ItemsSource="{Binding StepList}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Laufe " />
+                            <Label Text="{Binding Direction}" />
+                            <Label Text="{Binding NumberOfSteps}" />
+                            <Label Text="{Binding StepsToComplete}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button VerticalOptions="End" x:Name="ButtonEndStation" Text="Send to LogBuch" Clicked="ScanButton_OnClicked"
+                BackgroundColor="#43BB7B" TextColor="White" />
+    </StackLayout>
 </ContentPage>

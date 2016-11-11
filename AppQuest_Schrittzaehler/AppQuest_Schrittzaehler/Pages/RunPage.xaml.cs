@@ -13,15 +13,16 @@ namespace AppQuest_Schrittzaehler.Pages
     {
         private readonly RunPageViewModel _runPageViewModel;
 
-        
-		private ObservableCollection<Route> _routeList;
-		private Route _route;
+
+        private ObservableCollection<Route> _routeList;
+        private Route _route;
 
         public RunPage(Route route)
         {
             InitializeComponent();
             _runPageViewModel = new RunPageViewModel(route);
-			_route = route;
+            BindingContext = _runPageViewModel;
+            _route = route;
         }
 
         private void ScanButton_OnClicked(object sender, EventArgs e)
@@ -36,8 +37,7 @@ namespace AppQuest_Schrittzaehler.Pages
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-            _runPageViewModel.DisplaySteps(DirectionLabel, StepLabel);
+            base.OnAppearing();         
             _runPageViewModel.OnAppearing();
         }
 

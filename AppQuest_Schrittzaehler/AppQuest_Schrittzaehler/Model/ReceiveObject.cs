@@ -6,7 +6,7 @@ namespace AppQuest_Schrittzaehler.Model
     {
         public string StartStation { get; set; }
 
-        public IList<Steps> Input { get; set; }     
+        public IList<Step> Input { get; set; }     
             
     }
 }

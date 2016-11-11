@@ -37,9 +37,10 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Infrastructure\FileSaver.cs" />
+    <Compile Include="Infrastructure\RingBuffer.cs" />
     <Compile Include="Model\ReceiveObject.cs" />
     <Compile Include="Model\Route.cs" />
-    <Compile Include="Model\Steps.cs" />
+    <Compile Include="Model\Step.cs" />
     <Compile Include="Model\SubmitObject.cs" />
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -50,6 +51,7 @@
     <Compile Include="Pages\ScannerPage.xaml.cs">
       <DependentUpon>ScannerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\HomePageViewModel.cs" />
     <Compile Include="Infrastructure\MyScanner.cs" />
@@ -121,9 +123,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
