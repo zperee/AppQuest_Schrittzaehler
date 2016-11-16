@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using AppQuest_Schrittzaehler.Annotations;
@@ -56,6 +57,7 @@ namespace AppQuest_Schrittzaehler.ViewModel
 		public Route RouteInfo
 		{
 			get { return _run.RouteList[_index]; }
+
 		}
 
 		public ContentPage FinishScanButton_OnClicked(INavigation nav)
@@ -70,7 +72,13 @@ namespace AppQuest_Schrittzaehler.ViewModel
 			{
 				CurrentStep.StepsToComplete--;
 				CurrentStep = _run.RouteList[_index].StepList[_stepIndex];
-				CrossTextToSpeech.Current.Speak("Walk " + CurrentStep.StepsToComplete + " steps " + directionTranslation[CurrentStep.Direction]);
+				try
+				{
+					CrossTextToSpeech.Current.Speak("Walk " + CurrentStep.StepsToComplete + " steps " + directionTranslation[CurrentStep.Direction]);
+				}
+				catch (Exception e){
+					
+				}
 			}
 			else if (CurrentStep.StepsToComplete > 1)
 			{
@@ -93,7 +101,9 @@ namespace AppQuest_Schrittzaehler.ViewModel
 			var logBuch = DependencyService.Get<ILogBuchService>();
 			_run.RouteList[_index].IsInLogbuch = true;
 			await _fileSaver.SaveContentToLocalFileAsync(_run.RouteList);
+
 			logBuch.OpenLogBuch("Schrittzaehler", _run.RouteList[_index].Startstation.ToString(), _run.RouteList[_index].Endstation.ToString());
+
 		}
 
 		public void OnDisappearing()
@@ -104,10 +114,14 @@ namespace AppQuest_Schrittzaehler.ViewModel
 
 		public void OnAppearing()
 		{
-
 			_stepCounterService.Listen();
 			_stepCounterService.OnStep += StepCounterServiceOnOnStep;
-			CrossTextToSpeech.Current.Speak("Walk " + CurrentStep.StepsToComplete + " steps " + CurrentStep.Direction);
+			try
+			{
+			CrossTextToSpeech.Current.Speak("Walk " + CurrentStep.StepsToComplete + " steps " + directionTranslation[CurrentStep.Direction]);
+			} 
+			catch (Exception e){
+			}
 		}
 
 		private void StepCounterServiceOnOnStep(object sender, StepEventArgs stepEventArgs)

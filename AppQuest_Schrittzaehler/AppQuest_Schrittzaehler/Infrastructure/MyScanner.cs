@@ -36,7 +36,7 @@ namespace AppQuest_Schrittzaehler.Infrastructure
 
                     var firstStep = new Step
                     {
-                        Direction = "Geradeaus",
+                        Direction = "geradeaus",
                         NumberOfSteps = int.Parse(arr[0].ToString())
                     };
                     route.StepList.Add(firstStep);

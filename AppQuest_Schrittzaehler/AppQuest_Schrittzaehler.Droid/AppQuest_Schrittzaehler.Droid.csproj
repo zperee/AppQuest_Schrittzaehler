@@ -179,6 +179,13 @@
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\scan.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\scan.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\step.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\scan.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\scan.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\scan.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\step.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />

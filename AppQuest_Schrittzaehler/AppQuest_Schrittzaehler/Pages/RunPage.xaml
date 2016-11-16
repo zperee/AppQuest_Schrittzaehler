@@ -14,7 +14,7 @@
 	
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="AddStepButton" Icon="step.png" Clicked="AddStepButton_OnClicked" />
-		<ToolbarItem x:Name="ScanButton" Icon="step.png" Clicked="FinishScanButton_OnClicked" />
+		<ToolbarItem x:Name="ScanButton" Icon="scan.png" Clicked="FinishScanButton_OnClicked" />
     </ContentPage.ToolbarItems>
     <StackLayout Orientation="Vertical">
         <ListView VerticalOptions="StartAndExpand" SelectedItem="{Binding CurrentStep, Mode=TwoWay}"
