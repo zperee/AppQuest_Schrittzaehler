@@ -15,13 +15,9 @@ namespace AppQuest_Schrittzaehler.Pages
 
 
         private ObservableCollection<Route> _routeList;
-        private Run _run;
-		private int _index;
 
         public RunPage(Run run, int index)
 		{
-            _run = run;
-			_index = index;
 			InitializeComponent();
 			_runPageViewModel = new RunPageViewModel(run, index);
 			BindingContext = _runPageViewModel;

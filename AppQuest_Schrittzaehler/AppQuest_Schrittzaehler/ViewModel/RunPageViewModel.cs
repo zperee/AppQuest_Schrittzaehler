@@ -49,6 +49,11 @@ namespace AppQuest_Schrittzaehler.ViewModel
 			}
 		}
 
+		public Route RouteInfo
+		{
+			get { return _run.RouteList[_index]; }
+		}
+
 		public ContentPage FinishScanButton_OnClicked(INavigation nav)
 		{
 			return _scanner.ScanQrCode(_fileSaver, nav, _run, _index);
@@ -76,10 +81,11 @@ namespace AppQuest_Schrittzaehler.ViewModel
 			}
 		}
 
-		public void SendToLogBuch()
+		public async void SendToLogBuch()
 		{
 			var logBuch = DependencyService.Get<ILogBuchService>();
 			_run.RouteList[_index].IsInLogbuch = true;
+			await _fileSaver.SaveContentToLocalFileAsync(_run.RouteList);
 			logBuch.OpenLogBuch("Schrittzaehler", _run.RouteList[_index].Startstation.ToString(), _run.RouteList[_index].Endstation.ToString());
 		}
 

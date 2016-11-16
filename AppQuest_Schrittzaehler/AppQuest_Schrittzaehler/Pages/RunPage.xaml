@@ -2,8 +2,16 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			xmlns:local="clr-namespace:AppQuest_Schrittzaehler.Pages;assembly=AppQuest_Schrittzaehler"
              x:Class="AppQuest_Schrittzaehler.Pages.RunPage"
              Title="Detail">
+	
+	<ContentPage.Resources>
+	    <ResourceDictionary>
+	      <local:InvertBooleanConverter x:Key="booleanConverter" />
+	    </ResourceDictionary>    
+	</ContentPage.Resources>
+	
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="AddStepButton" Icon="step.png" Clicked="AddStepButton_OnClicked" />
 		<ToolbarItem x:Name="ScanButton" Icon="step.png" Clicked="FinishScanButton_OnClicked" />
@@ -24,7 +32,15 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+		 	<StackLayout Orientation="Horizontal">
+				<Label Text="Start Station: "/>
+				<Label Text="{Binding RouteInfo.Startstation}"/>
+			</StackLayout> 
+			<StackLayout Orientation="Horizontal">
+				<Label Text="End Station: "/>
+				<Label Text="{Binding RouteInfo.Endstation}"/>
+			</StackLayout>
         <Button VerticalOptions="End" x:Name="ButtonEndStation" Text="Send to LogBuch" Clicked="SendToLogBuch_OnClicked"
-                BackgroundColor="#43BB7B" TextColor="White" />
+                BackgroundColor="#43BB7B" TextColor="White"/>
     </StackLayout>
 </ContentPage>
