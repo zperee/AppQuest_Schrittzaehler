@@ -13,7 +13,8 @@ namespace AppQuest_Schrittzaehler.ViewModel
 {
 	public class RunPageViewModel : INotifyPropertyChanged
 	{
-		private readonly Route _route;
+		private readonly int _index;
+		private Run _run;
 		private int _stepIndex = 0;
 
 		private readonly IStepCounterService _stepCounterService;
@@ -21,19 +22,20 @@ namespace AppQuest_Schrittzaehler.ViewModel
 		private MyScanner _scanner;
 		private Step _currentStep;
 
-		public RunPageViewModel(Route route)
+		public RunPageViewModel(Run run, int index)
 		{
 			_scanner = new MyScanner();
-			_route = route;
+			_index = index;
+			_run = run;
 			_fileSaver = new FileSaver();
 			_stepCounterService = DependencyService.Get<IStepCounterService>();
-			CurrentStep = _route.StepList[_stepIndex];
+			CurrentStep = run.RouteList[index].StepList[_stepIndex];
 
 		}
 
 		public IList<Step> StepList
 		{
-			get { return _route.StepList; }
+			get { return _run.RouteList[_index].StepList; }
 		}
 
 		public Step CurrentStep
@@ -49,16 +51,16 @@ namespace AppQuest_Schrittzaehler.ViewModel
 
 		public ContentPage FinishScanButton_OnClicked(INavigation nav)
 		{
-			return _scanner.ScanQrCode(_fileSaver, nav, _route);
+			return _scanner.ScanQrCode(_fileSaver, nav, _run, _index);
 		}
 
 		public async void AddStepButton_OnClicked()
 		{
 
-			if (CurrentStep.StepsToComplete == 1 && ++_stepIndex < _route.StepList.Count)
+			if (CurrentStep.StepsToComplete == 1 && ++_stepIndex < _run.RouteList[_index].StepList.Count)
 			{
 				CurrentStep.StepsToComplete--;
-				CurrentStep = _route.StepList[_stepIndex];
+				CurrentStep = _run.RouteList[_index].StepList[_stepIndex];
 			}
 			else if (CurrentStep.StepsToComplete > 1)
 			{
@@ -77,8 +79,8 @@ namespace AppQuest_Schrittzaehler.ViewModel
 		public void SendToLogBuch()
 		{
 			var logBuch = DependencyService.Get<ILogBuchService>();
-			_route.IsInLogbuch = true;
-			logBuch.OpenLogBuch("Schrittzaehler", _route.Startstation.ToString(), _route.Endstation.ToString());
+			_run.RouteList[_index].IsInLogbuch = true;
+			logBuch.OpenLogBuch("Schrittzaehler", _run.RouteList[_index].Startstation.ToString(), _run.RouteList[_index].Endstation.ToString());
 		}
 
 		public void OnDisappearing()
@@ -97,9 +99,9 @@ namespace AppQuest_Schrittzaehler.ViewModel
 		private void StepCounterServiceOnOnStep(object sender, StepEventArgs stepEventArgs)
 		{
 			CurrentStep.StepsToComplete--;
-			if (CurrentStep.StepsToComplete == 0 && ++_stepIndex < _route.StepList.Count)
+			if (CurrentStep.StepsToComplete == 0 && ++_stepIndex < _run.RouteList[_index].StepList.Count)
 			{
-				CurrentStep = _route.StepList[_stepIndex];
+				CurrentStep = _run.RouteList[_index].StepList[_stepIndex];
 			}
 		}
 

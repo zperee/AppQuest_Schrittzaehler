@@ -15,14 +15,16 @@ namespace AppQuest_Schrittzaehler.Pages
 
 
         private ObservableCollection<Route> _routeList;
-        private Route _route;
+        private Run _run;
+		private int _index;
 
-        public RunPage(Route route)
-        {
-            InitializeComponent();
-            _runPageViewModel = new RunPageViewModel(route);
-            BindingContext = _runPageViewModel;
-            _route = route;
+        public RunPage(Run run, int index)
+		{
+            _run = run;
+			_index = index;
+			InitializeComponent();
+			_runPageViewModel = new RunPageViewModel(run, index);
+			BindingContext = _runPageViewModel;
         }
 
         private void AddStepButton_OnClicked(object sender, EventArgs e)

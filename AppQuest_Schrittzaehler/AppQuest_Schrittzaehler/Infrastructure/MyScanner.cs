@@ -65,7 +65,7 @@ namespace AppQuest_Schrittzaehler.Infrastructure
             return scanPage;
         }
 
-		public ContentPage ScanQrCode(FileSaver fileSaver, INavigation nav, Route route)
+		public ContentPage ScanQrCode(FileSaver fileSaver, INavigation nav, Run run, int index)
 		{
 			var scanPage = new ZXingScannerPage();
 
@@ -78,11 +78,13 @@ namespace AppQuest_Schrittzaehler.Infrastructure
 				{
 					var jObject = JObject.Parse(result.Text);
 					var endStation = jObject["endStation"];
-					route.Endstation = int.Parse(endStation.ToString());
+					if (endStation == null)
+						return;
+					
+					run.RouteList[index].Endstation = int.Parse(endStation.ToString());
 
+					await fileSaver.SaveContentToLocalFileAsync(run.RouteList);
 					Device.BeginInvokeOnMainThread(() => { nav.PopModalAsync(); });
-
-					await fileSaver.SaveContentToLocalFileAsync(route);
 				}
 			};
 			// Navigate to our scanner page

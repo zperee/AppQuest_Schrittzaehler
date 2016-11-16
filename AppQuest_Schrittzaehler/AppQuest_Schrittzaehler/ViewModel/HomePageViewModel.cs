@@ -29,10 +29,10 @@ namespace AppQuest_Schrittzaehler.ViewModel
             return _scanner.ScanQrCode(_run, _fileSaver, nav);
         }
 
-        public ContentPage RouteListView_OnItemSelected(object sender)
+        public ContentPage RouteListView_OnItemSelected(object sender, int index)
         {
-            var item = (Route) sender;
-            return new RunPage(item);
+
+			return new RunPage(_run, index);
         }
     }
 }

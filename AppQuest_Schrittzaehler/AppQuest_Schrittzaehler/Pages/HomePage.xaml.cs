@@ -53,8 +53,8 @@ namespace AppQuest_Schrittzaehler.Pages
             if (item == null) return;
 
             ((ListView)sender).SelectedItem = null;
-
-            Navigation.PushAsync(_homePageViewModel.RouteListView_OnItemSelected(item));
+			int index = _routeList.IndexOf((AppQuest_Schrittzaehler.Model.Route)item);
+            Navigation.PushAsync(_homePageViewModel.RouteListView_OnItemSelected(item, index));
             
         }
 
