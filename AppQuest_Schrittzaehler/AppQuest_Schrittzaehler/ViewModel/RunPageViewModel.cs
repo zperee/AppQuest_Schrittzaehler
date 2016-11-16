@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Acr.UserDialogs;
 using AppQuest_Schrittzaehler.Annotations;
 using AppQuest_Schrittzaehler.Infrastructure;
 using AppQuest_Schrittzaehler.Model;
 using AppQuest_Schrittzaehler.Services;
+using Plugin.TextToSpeech;
 using Xamarin.Forms;
 
 namespace AppQuest_Schrittzaehler.ViewModel
@@ -21,6 +20,7 @@ namespace AppQuest_Schrittzaehler.ViewModel
 		private FileSaver _fileSaver;
 		private MyScanner _scanner;
 		private Step _currentStep;
+		private IDictionary<string, string> directionTranslation;
 
 		public RunPageViewModel(Run run, int index)
 		{
@@ -30,7 +30,11 @@ namespace AppQuest_Schrittzaehler.ViewModel
 			_fileSaver = new FileSaver();
 			_stepCounterService = DependencyService.Get<IStepCounterService>();
 			CurrentStep = run.RouteList[index].StepList[_stepIndex];
+			directionTranslation = new Dictionary<string, string>();
 
+			directionTranslation.Add("links", "left");
+			directionTranslation.Add("rechts", "right");
+			directionTranslation.Add("geradeaus", "straight");
 		}
 
 		public IList<Step> StepList
@@ -66,14 +70,17 @@ namespace AppQuest_Schrittzaehler.ViewModel
 			{
 				CurrentStep.StepsToComplete--;
 				CurrentStep = _run.RouteList[_index].StepList[_stepIndex];
+				CrossTextToSpeech.Current.Speak("Walk " + CurrentStep.StepsToComplete + " steps " + directionTranslation[CurrentStep.Direction]);
 			}
 			else if (CurrentStep.StepsToComplete > 1)
 			{
 				CurrentStep.StepsToComplete--;
+				CrossTextToSpeech.Current.Speak("Walk " + CurrentStep.StepsToComplete + " steps ");
 			}
 			else if (CurrentStep.StepsToComplete == 1)
 			{
 				CurrentStep.StepsToComplete--;
+				CrossTextToSpeech.Current.Speak("You arrived");
 				await Application.Current.MainPage.DisplayAlert("Info", "Alle Schritte auf dieser Route wurden abgelaufen!", "OK");
 			}
 			else {
@@ -97,9 +104,10 @@ namespace AppQuest_Schrittzaehler.ViewModel
 
 		public void OnAppearing()
 		{
-			
+
 			_stepCounterService.Listen();
 			_stepCounterService.OnStep += StepCounterServiceOnOnStep;
+			CrossTextToSpeech.Current.Speak("Walk " + CurrentStep.StepsToComplete + " steps " + CurrentStep.Direction);
 		}
 
 		private void StepCounterServiceOnOnStep(object sender, StepEventArgs stepEventArgs)
