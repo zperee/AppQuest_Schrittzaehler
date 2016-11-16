@@ -57,7 +57,6 @@ namespace AppQuest_Schrittzaehler.ViewModel
 		public Route RouteInfo
 		{
 			get { return _run.RouteList[_index]; }
-
 		}
 
 		public ContentPage FinishScanButton_OnClicked(INavigation nav)
@@ -72,24 +71,26 @@ namespace AppQuest_Schrittzaehler.ViewModel
 			{
 				CurrentStep.StepsToComplete--;
 				CurrentStep = _run.RouteList[_index].StepList[_stepIndex];
+				await _fileSaver.SaveContentToLocalFileAsync(_run.RouteList);
 				try
 				{
 					CrossTextToSpeech.Current.Speak("Walk " + CurrentStep.StepsToComplete + " steps " + directionTranslation[CurrentStep.Direction]);
 				}
 				catch (Exception e){
-					
 				}
 			}
 			else if (CurrentStep.StepsToComplete > 1)
 			{
 				CurrentStep.StepsToComplete--;
 				CrossTextToSpeech.Current.Speak("Walk " + CurrentStep.StepsToComplete + " steps ");
+				await _fileSaver.SaveContentToLocalFileAsync(_run.RouteList);
 			}
 			else if (CurrentStep.StepsToComplete == 1)
 			{
 				CurrentStep.StepsToComplete--;
 				CrossTextToSpeech.Current.Speak("You arrived");
 				await Application.Current.MainPage.DisplayAlert("Info", "Alle Schritte auf dieser Route wurden abgelaufen!", "OK");
+				await _fileSaver.SaveContentToLocalFileAsync(_run.RouteList);
 			}
 			else {
 				await Application.Current.MainPage.DisplayAlert("Info", "Alle Schritte auf dieser Route wurden abgelaufen!", "OK");
