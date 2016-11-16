@@ -6,6 +6,7 @@
              Title="Detail">
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="AddStepButton" Icon="step.png" Clicked="AddStepButton_OnClicked" />
+		<ToolbarItem x:Name="ScanButton" Icon="step.png" Clicked="FinishScanButton_OnClicked" />
     </ContentPage.ToolbarItems>
     <StackLayout Orientation="Vertical">
         <ListView VerticalOptions="StartAndExpand" SelectedItem="{Binding CurrentStep, Mode=TwoWay}"
@@ -23,7 +24,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button VerticalOptions="End" x:Name="ButtonEndStation" Text="Send to LogBuch" Clicked="ScanButton_OnClicked"
+        <Button VerticalOptions="End" x:Name="ButtonEndStation" Text="Send to LogBuch" Clicked="SendToLogBuch_OnClicked"
                 BackgroundColor="#43BB7B" TextColor="White" />
     </StackLayout>
 </ContentPage>

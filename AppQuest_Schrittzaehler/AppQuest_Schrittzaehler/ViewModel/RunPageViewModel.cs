@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Acr.UserDialogs;
 using AppQuest_Schrittzaehler.Annotations;
 using AppQuest_Schrittzaehler.Infrastructure;
 using AppQuest_Schrittzaehler.Model;
@@ -10,86 +11,104 @@ using Xamarin.Forms;
 
 namespace AppQuest_Schrittzaehler.ViewModel
 {
-    public class RunPageViewModel : INotifyPropertyChanged
-    {
-        private readonly Route _route;
-        private int _stepIndex = 0;
+	public class RunPageViewModel : INotifyPropertyChanged
+	{
+		private readonly Route _route;
+		private int _stepIndex = 0;
 
-        private readonly IStepCounterService _stepCounterService;
-        private FileSaver _fileSaver;
-        private MyScanner _scanner;
-        private Step _currentStep;
+		private readonly IStepCounterService _stepCounterService;
+		private FileSaver _fileSaver;
+		private MyScanner _scanner;
+		private Step _currentStep;
 
-        public RunPageViewModel(Route route)
-        {
-            _scanner = new MyScanner();
-            _route = route;
-            _fileSaver = new FileSaver();
-            _stepCounterService = DependencyService.Get<IStepCounterService>();
-            
-        }
+		public RunPageViewModel(Route route)
+		{
+			_scanner = new MyScanner();
+			_route = route;
+			_fileSaver = new FileSaver();
+			_stepCounterService = DependencyService.Get<IStepCounterService>();
+			CurrentStep = _route.StepList[_stepIndex];
 
-        public IList<Step> StepList
-        {
-            get { return _route.StepList; }
-        }
+		}
 
-        public Step CurrentStep
-        {
-            get { return _currentStep; }
-            set
-            {
-                if (Equals(value, _currentStep)) return;
-                _currentStep = value;
-                OnPropertyChanged();
-            }
-        }
+		public IList<Step> StepList
+		{
+			get { return _route.StepList; }
+		}
 
-        public ContentPage ScanButton_OnClicked()
-        {
-            //TODO
-            //return _scanner.ScanQrCode();
-            return null;
-        }
+		public Step CurrentStep
+		{
+			get { return _currentStep; }
+			set
+			{
+				if (Equals(value, _currentStep)) return;
+				_currentStep = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public void AddStepButton_OnClicked()
-        {
-            CurrentStep.StepsToComplete--;
-            if (CurrentStep.StepsToComplete == 0 && ++_stepIndex < _route.StepList.Count)
-            {
-                CurrentStep = _route.StepList[_stepIndex];
-            }
-        }
+		public ContentPage FinishScanButton_OnClicked(INavigation nav)
+		{
+			return _scanner.ScanQrCode(_fileSaver, nav, _route);
+		}
 
+		public async void AddStepButton_OnClicked()
+		{
 
-        public void OnDisappearing()
-        {
-            _stepCounterService.OnStep -= StepCounterServiceOnOnStep;
-            _stepCounterService.Pause();
-        }
+			if (CurrentStep.StepsToComplete == 1 && ++_stepIndex < _route.StepList.Count)
+			{
+				CurrentStep.StepsToComplete--;
+				CurrentStep = _route.StepList[_stepIndex];
+			}
+			else if (CurrentStep.StepsToComplete > 1)
+			{
+				CurrentStep.StepsToComplete--;
+			}
+			else if (CurrentStep.StepsToComplete == 1)
+			{
+				CurrentStep.StepsToComplete--;
+				await Application.Current.MainPage.DisplayAlert("Info", "Alle Schritte auf dieser Route wurden abgelaufen!", "OK");
+			}
+			else {
+				await Application.Current.MainPage.DisplayAlert("Info", "Alle Schritte auf dieser Route wurden abgelaufen!", "OK");
+			}
+		}
 
-        public void OnAppearing()
-        {
-            CurrentStep = _route.StepList[_stepIndex];
-            _stepCounterService.Listen();
-            _stepCounterService.OnStep += StepCounterServiceOnOnStep;
-        }
+		public void SendToLogBuch()
+		{
+			var logBuch = DependencyService.Get<ILogBuchService>();
+			_route.IsInLogbuch = true;
+			logBuch.OpenLogBuch("Schrittzaehler", _route.Startstation.ToString(), _route.Endstation.ToString());
+		}
 
-        private void StepCounterServiceOnOnStep(object sender, StepEventArgs stepEventArgs)
-        {            
-            CurrentStep.StepsToComplete--;
-            if (CurrentStep.StepsToComplete == 0 && ++_stepIndex < _route.StepList.Count)
-            {
-                CurrentStep = _route.StepList[_stepIndex];
-            }
-        }
+		public void OnDisappearing()
+		{
+			_stepCounterService.OnStep -= StepCounterServiceOnOnStep;
+			_stepCounterService.Pause();
+		}
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public void OnAppearing()
+		{
+			
+			_stepCounterService.Listen();
+			_stepCounterService.OnStep += StepCounterServiceOnOnStep;
+		}
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
+		private void StepCounterServiceOnOnStep(object sender, StepEventArgs stepEventArgs)
+		{
+			CurrentStep.StepsToComplete--;
+			if (CurrentStep.StepsToComplete == 0 && ++_stepIndex < _route.StepList.Count)
+			{
+				CurrentStep = _route.StepList[_stepIndex];
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		[NotifyPropertyChangedInvocator]
+		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
 }

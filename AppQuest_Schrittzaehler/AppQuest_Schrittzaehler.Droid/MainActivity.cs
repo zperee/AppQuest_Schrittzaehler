@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using AppQuest_Schrittzaehler.Droid.PlattformServices;
+using Xamarin.Forms;
 
 namespace AppQuest_Schrittzaehler.Droid
 {
@@ -20,6 +21,7 @@ namespace AppQuest_Schrittzaehler.Droid
 
             base.OnCreate(bundle);
 
+			UserDialogs.Init(() => (Activity)Forms.Context);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();            
 
             global::Xamarin.Forms.Forms.Init(this, bundle);

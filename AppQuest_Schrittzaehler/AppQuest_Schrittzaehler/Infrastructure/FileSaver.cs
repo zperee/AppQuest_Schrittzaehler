@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using AppQuest_Schrittzaehler.Model;
 using Newtonsoft.Json;
 using PCLStorage;
 

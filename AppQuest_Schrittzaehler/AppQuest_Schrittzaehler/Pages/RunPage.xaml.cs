@@ -25,17 +25,23 @@ namespace AppQuest_Schrittzaehler.Pages
             _route = route;
         }
 
-        private void ScanButton_OnClicked(object sender, EventArgs e)
-        {
-            Navigation.PushModalAsync(_runPageViewModel.ScanButton_OnClicked());
-        }
-
         private void AddStepButton_OnClicked(object sender, EventArgs e)
         {
             _runPageViewModel.AddStepButton_OnClicked();
         }
 
-        protected override void OnAppearing()
+		private async void FinishScanButton_OnClicked(object sender, EventArgs e)
+		{
+			var nav = Navigation;
+			await Navigation.PushModalAsync(_runPageViewModel.FinishScanButton_OnClicked(nav));
+		}
+
+		private void SendToLogBuch_OnClicked(object sender, EventArgs e)
+		{
+			_runPageViewModel.SendToLogBuch();
+		}
+
+		protected override void OnAppearing()
         {
             base.OnAppearing();         
             _runPageViewModel.OnAppearing();
